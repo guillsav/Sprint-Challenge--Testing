@@ -13,6 +13,11 @@ describe('GET /', () => {
     expect(res.status).toBe(200);
   });
 
+  it('Should return the body', async () => {
+    const res = await request(server).get('/');
+    expect(res.text).toBe('<h2>Welcome</h2>');
+  });
+
   it('Should return HTML as response type ', async () => {
     const res = await request(server).get('/');
     expect(res.type).toBe('text/html');
