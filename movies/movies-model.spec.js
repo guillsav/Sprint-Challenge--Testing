@@ -73,7 +73,6 @@ describe('Movies model', () => {
         {id: 2, title: 'Titanic', genre: 'drama', releaseYear: 1997}
       ]);
       expect(movies).toHaveLength(2);
-      expect;
     });
 
     it('should return 200 and empty array', async () => {

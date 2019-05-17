@@ -17,15 +17,13 @@ module.exports = function validation(req, res, next) {
       .min(6)
       .max(128)
       .required(),
-    releaseYear: Joi.number()
-      .integer()
-      .required()
+    releaseYear: Joi.number().integer()
   });
 
   Joi.validate(req.body, schema, (e, result) => {
     if (e) {
       res
-        .status(400)
+        .status(422)
         .json({message: 'Please provide title, genre and release year.'});
     } else {
       next();
