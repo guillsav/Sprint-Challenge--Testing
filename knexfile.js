@@ -6,15 +6,25 @@ module.exports = {
     connection: {
       filename: './data/movies.db3'
     },
-    useNullAsDefaut: true,
+    useNullAsDefault: true,
     migrations: {
       directory: './data/migrations'
     },
     seeds: {
       directory: './data/seeds'
+    }
+  },
+  testing: {
+    client: 'sqlite3',
+    connection: {
+      filename: './data/moviestest.db3'
     },
-    pool: {
-      afterCreate: (conn, cb) => conn.run('PRAGMA foreign_keys = ON', cb)
+    useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
     }
   }
 };
