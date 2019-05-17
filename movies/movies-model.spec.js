@@ -39,6 +39,18 @@ describe('Movies model', () => {
       const movies = await db('movies');
       expect(movies).toHaveLength(1);
     });
+
+    it('should return 201 status code', async () => {
+      await request(server)
+        .post('/api/movies')
+        .send({
+          id: 10,
+          title: 'Black Panther',
+          genre: 'action',
+          releaseYear: 2012
+        })
+        .expect(201);
+    });
   });
 
   describe('GET /', () => {
@@ -63,31 +75,18 @@ describe('Movies model', () => {
       expect(movies).toHaveLength(2);
       expect;
     });
-  });
 
-  describe('GET /:id', () => {
-    it('Should return a single movie', async () => {
-      let movie = await Movies.addMovie({
-        title: 'Avengers',
-        genre: 'action',
-        releaseYear: 2012
-      });
-
-      const res = await request(server).get('/');
-      expect(movie.id).toBe(1);
-      expect(res.status).toBe(200);
+    it('should return 200 and empty array', async () => {
+      await request(server)
+        .get('/api/movies')
+        .send([])
+        .expect(200);
     });
 
-    it('should return a 404 status code', async () => {
-      let movie = await Movies.addMovie({
-        title: 'Avengers',
-        genre: 'action',
-        releaseYear: 2012
-      });
-
-      const res = await request(server).get('/api/movies/2');
-      expect(res.status).toBe(404);
-      expect(res.notFound).toBe(true);
+    it('should return conten type JSON', async () => {
+      await request(server)
+        .get('/api/movies')
+        .expect('Content-Type', /json/);
     });
   });
 });
