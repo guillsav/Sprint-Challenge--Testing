@@ -3,20 +3,11 @@ const Joi = require('@hapi/joi');
 module.exports = function validation(req, res, next) {
   const schema = Joi.object().keys({
     title: Joi.string()
-      .alphanum()
       .min(3)
       .max(128)
       .required(),
-    genre: Joi.string()
-      .alphanum()
-      .min(3)
-      .max(128)
-      .required(),
-    genre: Joi.string()
-      .alphanum()
-      .min(6)
-      .max(128)
-      .required(),
+
+    genre: Joi.string().required(),
     releaseYear: Joi.number().integer()
   });
 

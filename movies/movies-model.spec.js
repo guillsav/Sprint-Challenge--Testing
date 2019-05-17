@@ -44,12 +44,22 @@ describe('Movies model', () => {
       await request(server)
         .post('/api/movies')
         .send({
-          id: 10,
           title: 'Black Panther',
           genre: 'action',
           releaseYear: 2012
         })
         .expect(201);
+    });
+
+    it('should return 422 status code', async () => {
+      await request(server)
+        .post('/api/movies')
+        .send({
+          title: '',
+          genre: '',
+          releaseYear: 2012
+        })
+        .expect(422);
     });
   });
 

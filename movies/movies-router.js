@@ -2,7 +2,7 @@ const router = require('express').Router();
 const db = require('./movies-model.js');
 const validation = require('../middleware/validation.js');
 
-router.post('/', async (req, res) => {
+router.post('/', validation, async (req, res) => {
   try {
     const newMovie = await db.addMovie(req.body);
     res.status(201).json(newMovie);
