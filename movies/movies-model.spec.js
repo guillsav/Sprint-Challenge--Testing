@@ -4,7 +4,7 @@ const server = require('../api/server.js');
 const Movies = require('./movies-model.js');
 
 describe('Movies model', () => {
-  afterEach(async () => {
+  beforeEach(async () => {
     await db('movies').truncate();
   });
 
@@ -27,6 +27,17 @@ describe('Movies model', () => {
         releaseYear: 2012
       });
       expect(movie.genre).toBe('action');
+    });
+
+    it('Add a movie', async () => {
+      await Movies.addMovie({
+        title: 'Avengers',
+        genre: 'action',
+        releaseYear: 2012
+      });
+
+      const movies = await db('movies');
+      expect(movies).toHaveLength(1);
     });
   });
 
